@@ -9,9 +9,9 @@ import (
 
 func Greeter(ctx workflow.Context, name string) (string, error) {
 	ao := workflow.ActivityOptions{
-		StartToCloseTimeout: 5 * time.Second,
+		StartToCloseTimeout: 1 * time.Second,
 		RetryPolicy: &temporal.RetryPolicy{
-			InitialInterval: time.Second,
+			InitialInterval: 1 * time.Second,
 			MaximumInterval: 5 * time.Second,
 		},
 	}
