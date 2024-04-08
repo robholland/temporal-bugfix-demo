@@ -1,4 +1,4 @@
-package starter
+package demo
 
 import (
 	"errors"
@@ -7,24 +7,39 @@ import (
 
 type Activities struct{}
 
-func (a *Activities) StepOne(input string) (string, error) {
-	fmt.Println("--> [Step One]  Input: " + input)
-	return input, nil
+var act *Activities
+
+func (a *Activities) PickGreeting(name string) (string, error) {
+	fmt.Printf("--> pickGreeting(name: %s)\n", name)
+	switch name {
+	case "Alice":
+		return "Awesome", nil
+	case "Bob":
+		return "Brilliant", nil
+	default:
+		return "Infamous", nil
+	}
 }
 
-func (a *Activities) StepTwo(input string) (string, error) {
-	hasBug := true
+func (a *Activities) SendSMS(greeting string, name string) error {
+	fmt.Printf("--> sendSMS(greeting: %s, name: %s)\n", greeting, name)
 
-	if hasBug {
-		return "oops", errors.New("oops error. Hard to fix. Be warned.")
-	} else {
-		fmt.Println("--> [Step Two]  Input: " + input)
+	hasBug := false
+
+	if hasBug && name == "Bob" {
+		return errors.New("oops, can't send to Bob right now")
 	}
 
-	return input, nil
+	fmt.Printf("*** SMS: Hey %s %s!\n", greeting, name)
+
+	return nil
 }
 
-func (a *Activities) StepThree(input string) (string, error) {
-	fmt.Println("--> [Step Three]  Input: " + input)
-	return input, nil
+func (a *Activities) SendEmail(greeting string, name string) (string, error) {
+	fmt.Printf("--> sendEmail(greeting: %s, name: %s)\n", greeting, name)
+
+	fmt.Printf("*** Email: Hey %s %s!\n", greeting, name)
+
+	msgId := "123456789-123456789"
+	return msgId, nil
 }
