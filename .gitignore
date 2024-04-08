@@ -25,6 +25,7 @@ build/
 lib/
 *.db
 obj/
+bin/
 
 # Compiled class file
 *.class

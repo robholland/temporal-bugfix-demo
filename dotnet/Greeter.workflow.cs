@@ -7,7 +7,7 @@ using Temporalio.Workflows;
 public class Greeter
 {
     [WorkflowRun]
-    public static async Task<string> RunAsync(string name)
+    public async Task<string> RunAsync(string name)
     {
         var greeting = await Workflow.ExecuteActivityAsync(
             () => DemoActivities.PickGreeting(name),
