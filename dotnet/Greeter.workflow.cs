@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Temporalio.Workflows;
 
 [Workflow]
-public static class Greeter
+public class Greeter
 {
     [WorkflowRun]
     public static async Task<string> RunAsync(string name)
