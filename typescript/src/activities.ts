@@ -14,7 +14,7 @@ export async function pickGreeting(name: string): Promise<string> {
 export async function sendSMS(greeting: string, name: string): Promise<void> {
   console.log(`--> sendSMS(greeting: ${greeting}, name: ${name})`)
 
-  const hasBug = true
+  const hasBug = false
 
   if (hasBug && name == "Bob") {
     throw new Error("oops, can't send to Bob right now")
