@@ -41,11 +41,11 @@ async Task RunWorkerAsync()
 async Task ExecuteWorkflowAsync()
 {
     await client.ExecuteWorkflowAsync(
-        (Greeter wf) => wf.RunAsync("Alice"),
+        () => Greeter.RunAsync("Alice"),
         new(id: "bugfix-demo-alice", taskQueue: "bugfix-demo"));
 
     await client.ExecuteWorkflowAsync(
-        (Greeter wf) => wf.RunAsync("Bob"),
+        () => Greeter.RunAsync("Bob"),
         new(id: "bugfix-demo-bob", taskQueue: "bugfix-demo"));
 }
 
