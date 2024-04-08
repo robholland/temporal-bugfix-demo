@@ -16,9 +16,9 @@ async def main():
 
     worker = Worker(
         client,
-        task_queue="bugfix-task-queue",
-        workflows=[BugfixWorkflow],
-        activities=[one, two, three],
+        task_queue="bugfix-demo",
+        workflows=[Greeter],
+        activities=[pickGreeting, sendSMS, sendEmail],
         sticky_queue_schedule_to_start_timeout=timedelta(seconds=1),
     )
     logging.info("Starting worker.")

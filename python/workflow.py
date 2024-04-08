@@ -1,59 +1,34 @@
-import asyncio
-
 from datetime import timedelta
 
-from temporalio import activity, workflow
+from temporalio import workflow
+from activities import *
 from temporalio.common import RetryPolicy
 
-
 @workflow.defn
-class BugfixWorkflow:
+class Greeter:
     @workflow.run
-    async def run(self) -> None:
-        workflow.logger.info("Running workflow")
+    async def run(self, name: str) -> None:
+        workflow.logger.info("Workflow started")
 
-        rt_policy = RetryPolicy(
-            maximum_interval=timedelta(seconds=1),
-            backoff_coefficient=1.0)
-
-        await workflow.execute_activity(
-            one,
+        greeting = await workflow.execute_activity(
+            pickGreeting,
+            PickGreetingInput(name),
             start_to_close_timeout=timedelta(seconds=1),
-            retry_policy=rt_policy,
+            retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
 
         await workflow.execute_activity(
-            two,
+            sendSMS,
+            SendSMSInput(greeting, name),
             start_to_close_timeout=timedelta(seconds=1),
-            heartbeat_timeout=timedelta(seconds=1),
-            retry_policy=rt_policy,
+            retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
 
         await workflow.execute_activity(
-            three,
+            sendEmail,
+            SendEmailInput(greeting, name),
             start_to_close_timeout=timedelta(seconds=1),
-            retry_policy=rt_policy,
+            retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
 
-
-@activity.defn
-async def one() -> str:
-    print("--------> Running one!")
-    return "One done!"
-
-
-@activity.defn
-async def two() -> str:
-    print("--------> Running two!")
-
-    has_bug = True
-    if has_bug:
-        raise TypeError
-    else:
-        return "Two done!"
-
-
-@activity.defn
-async def three() -> str:
-    print("--------> Running three!")
-    return "Three done!"
+        workflow.logger.info("Workflow completed")
