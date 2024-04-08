@@ -2,15 +2,12 @@ import { DefaultLogger, NativeConnection, Worker, Runtime } from '@temporalio/wo
 import * as activities from './activities';
 
 async function run() {
-  Runtime.install({ logger: new DefaultLogger('WARN') });
+  Runtime.install({});
 
-  const connection = await NativeConnection.connect({
-    address: 'localhost:7233',
-  });
+  const connection = await NativeConnection.connect({});
 
   const worker = await Worker.create({
     connection,
-    namespace: 'default',
     taskQueue: 'bugfix-demo',
     workflowsPath: require.resolve('./workflows'),
     stickyQueueScheduleToStartTimeout: '1s',

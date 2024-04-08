@@ -1,23 +1,22 @@
 import * as wf from '@temporalio/workflow';
 import type * as activities from './activities';
 
-const { stepOne, stepTwo, stepThree } = wf.proxyActivities<typeof activities>({
+const { pickGreeting, sendSMS, sendEmail } = wf.proxyActivities<typeof activities>({
   startToCloseTimeout: '1s',
   retry: {
-      backoffCoefficient: 1,
       initialInterval: '1s',
+      maximumInterval: '5s',
   },
 });
 
-export async function bugFixWorkflow(): Promise<string> {
-  let result = await stepOne("1");
-  wf.log.info(`Result from step one: ${result}`)
- 
-  result = await stepTwo("2");
-  wf.log.info(`Result from step two: ${result}`)
+export async function greeter(name: string): Promise<string> {
+  wf.log.info(`Workflow started`)
 
-  result = await stepThree("3");
-  wf.log.info(`Result from step three: ${result}`)
+  const greeting = await pickGreeting(name);
+  await sendSMS(greeting, name);
+  await sendEmail(greeting, name);
+
+  wf.log.info(`Workflow completed`)
 
   return "Done!"
 }

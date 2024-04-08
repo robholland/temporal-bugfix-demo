@@ -6,9 +6,8 @@
     "build": "tsc --build",
     "build.watch": "tsc --build --watch",
     "lint": "eslint .",
-    "start": "ts-node src/worker.ts",
-    "start.watch": "nodemon src/worker.ts",
-    "workflow": "ts-node src/starter.ts",
+    "worker": "ts-node src/worker.ts",
+    "start-workflows": "ts-node src/start-workflows.ts",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "test": "mocha --exit --require ts-node/register --require source-map-support/register src/mocha/*.test.ts"
   },

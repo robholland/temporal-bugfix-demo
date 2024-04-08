@@ -1,21 +1,33 @@
-export async function stepOne(step: string): Promise<string> {
-  console.log(`Running step ${step}!`)
-  return "One done!";
-}
+export async function pickGreeting(name: string): Promise<string> {
+  console.log(`--> pickGreeting(name: ${name})`)
 
-export async function stepTwo(step: string): Promise<string> {
-  console.log(`Running step ${step}!`)
-
-  // TODO FIXME
-  const hasBug = true
-
-  if (hasBug) {
-    throw new Error("‼️ ERROR!!!! Really hard to fix. 😜")
+  switch(name) {
+    case "Alice":
+      return "Awesome"
+    case "Bob":
+      return "Brilliant"
+    default:
+      return "Infamous"
   }
-  return "Two done!";
 }
 
-export async function stepThree(step: string): Promise<string> {
-  console.log(`Running step ${step}!`)
-  return "Three done!";
+export async function sendSMS(greeting: string, name: string): Promise<void> {
+  console.log(`--> sendSMS(greeting: ${greeting}, name: ${name})`)
+
+  const hasBug = false
+
+  if (hasBug && name == "Bob") {
+    throw new Error("oops, can't send to Bob right now")
+  }
+
+  console.log(`*** SMS: Hey ${greeting} ${name}!`)
+}
+
+export async function sendEmail(greeting: string, name: string): Promise<string> {
+  console.log(`--> sendEmail(greeting: ${greeting}, name: ${name})`)
+  console.log(`*** Email: Hey ${greeting} ${name}!`)
+
+  const msgId = "123456789-123456789"
+
+  return msgId
 }
