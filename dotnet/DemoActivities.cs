@@ -20,7 +20,7 @@ public static class DemoActivities
     public static void SendSMS(string greeting, string name) {
         Console.WriteLine($"--> SendSMS(greeting: {greeting}, name: {name})");
         
-        var hasBug = false;
+        var hasBug = true;
         
         if (hasBug && name == "Bob") {
             throw new InvalidOperationException("oops, can't send to Bob right now");
