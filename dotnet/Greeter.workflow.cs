@@ -16,20 +16,22 @@ public class Greeter
                 StartToCloseTimeout = TimeSpan.FromSeconds(1),
             });
 
-        await Workflow.ExecuteActivityAsync(
+        var sms = Workflow.ExecuteActivityAsync(
             () => DemoActivities.SendSMS(greeting, name),
             new()
             {
                 StartToCloseTimeout = TimeSpan.FromSeconds(1),
             });
 
-        var msgId = await Workflow.ExecuteActivityAsync(
+        var email = Workflow.ExecuteActivityAsync(
             () => DemoActivities.SendEmail(greeting, name),
             new()
             {
                 StartToCloseTimeout = TimeSpan.FromSeconds(1),
             });
 
-        return msgId;
+        await Task.WhenAll(sms, email);
+
+        return "";
     }
 }

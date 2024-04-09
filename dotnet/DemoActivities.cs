@@ -30,12 +30,8 @@ public static class DemoActivities
     }
 
     [Activity]
-    public static string SendEmail(string greeting, string name) {
+    public static void SendEmail(string greeting, string name) {
         Console.WriteLine($"--> SendEmail(greeting: {greeting}, name: {name})");
         Console.WriteLine($"*** Email: Hey {greeting} {name}!");
-        
-        var msgId = "123456789-123456789";
-
-        return msgId;
     }
 }
