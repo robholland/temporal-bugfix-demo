@@ -39,10 +39,6 @@ async def sendSMS(input: SendSMSInput):
 
 
 @activity.defn
-async def sendEmail(input: SendEmailInput) -> str:
+async def sendEmail(input: SendEmailInput):
     print("--> sendEmail(greeting: %s, name: %s)" % (input.greeting, input.name))
     print("*** Email: Hey %s %s!" % (input.greeting, input.name))
-
-    msg_id = "123456789-123456789"
-
-    return msg_id

@@ -1,4 +1,5 @@
 from datetime import timedelta
+import asyncio
 
 from temporalio import workflow
 from activities import *
@@ -17,18 +18,21 @@ class Greeter:
             retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
 
-        await workflow.execute_activity(
+        sms = workflow.execute_activity(
             sendSMS,
             SendSMSInput(greeting, name),
             start_to_close_timeout=timedelta(seconds=1),
             retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
 
-        await workflow.execute_activity(
+        email = workflow.execute_activity(
             sendEmail,
             SendEmailInput(greeting, name),
             start_to_close_timeout=timedelta(seconds=1),
             retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
+
+        await sms
+        await email
 
         workflow.logger.info("Workflow completed")
