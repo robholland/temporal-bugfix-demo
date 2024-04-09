@@ -35,11 +35,9 @@ func (a *Activities) SendSMS(greeting string, name string) error {
 	return nil
 }
 
-func (a *Activities) SendEmail(greeting string, name string) (string, error) {
+func (a *Activities) SendEmail(greeting string, name string) error {
 	fmt.Printf("--> sendEmail(greeting: %s, name: %s)\n", greeting, name)
-
 	fmt.Printf("*** Email: Hey %s %s!\n", greeting, name)
 
-	msgId := "123456789-123456789"
-	return msgId, nil
+	return nil
 }

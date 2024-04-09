@@ -7,7 +7,7 @@ import (
 	"go.temporal.io/sdk/workflow"
 )
 
-func Greeter(ctx workflow.Context, name string) (string, error) {
+func Greeter(ctx workflow.Context, name string) error {
 	ao := workflow.ActivityOptions{
 		StartToCloseTimeout: 1 * time.Second,
 		RetryPolicy: &temporal.RetryPolicy{
@@ -28,30 +28,32 @@ func Greeter(ctx workflow.Context, name string) (string, error) {
 		name,
 	).Get(ctx, &greeting)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	err = workflow.ExecuteActivity(ctx,
+	sms := workflow.ExecuteActivity(ctx,
 		act.SendSMS,
 		greeting,
 		name,
-	).Get(ctx, nil)
-	if err != nil {
-		return "", err
-	}
+	)
 
-	var msgId string
-
-	err = workflow.ExecuteActivity(ctx,
+	email := workflow.ExecuteActivity(ctx,
 		act.SendEmail,
 		greeting,
 		name,
-	).Get(ctx, &msgId)
+	)
+
+	err = sms.Get(ctx, nil)
 	if err != nil {
-		return "", err
+		return err
+	}
+
+	err = email.Get(ctx, nil)
+	if err != nil {
+		return err
 	}
 
 	logger.Info("Workflow completed.")
 
-	return msgId, nil
+	return nil
 }
