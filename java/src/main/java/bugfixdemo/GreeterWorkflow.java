@@ -5,7 +5,7 @@ import io.temporal.workflow.WorkflowMethod;
 
 // Workflow interface
 @WorkflowInterface
-public interface BugFixDemoWorkflow {
+public interface GreeterWorkflow {
     @WorkflowMethod
-    String bugfixWorkflow();
+    String greeter(String name);
 }

@@ -6,11 +6,11 @@ import io.temporal.activity.ActivityMethod;
 @ActivityInterface
 public interface BugFixDemoActivities {
     @ActivityMethod()
-    String stepOne(String input);
+    String pickGreeting(String name);
 
     @ActivityMethod()
-    String stepTwo(String input);
+    void sendSMS(String greeting, String name);
 
     @ActivityMethod()
-    String stepThree(String input);
+    void sendEmail(String greeting, String name);
 }

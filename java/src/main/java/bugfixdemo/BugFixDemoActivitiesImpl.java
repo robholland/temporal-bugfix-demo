@@ -1,27 +1,36 @@
 package bugfixdemo;
 
 public class BugFixDemoActivitiesImpl implements BugFixDemoActivities {
-    private final boolean HAS_BUG = false;
-
     @Override
-    public String stepOne(String input) {
-        System.out.println("Running step 1 with input " + input);
-        return "One Done!";
+    public String pickGreeting(String name) {
+        System.out.printf("--> pickGreeting(name: %s)\n", name);
+        
+        switch(name) {
+        case "Alice":
+            return "Awesome";
+        case "Bob":
+            return "Brilliant";
+        default:
+            return "Infamous";
+        }    
     }
 
     @Override
-    public String stepTwo(String input) {
-        if (HAS_BUG) {
-            throw new UnsupportedOperationException("Cannot run this thing!");
-        } else {
-            System.out.println("Running step 2 with input " + input);
+    public void sendSMS(String greeting, String name) {
+        System.out.printf("--> sendSMS(greeting: %s, name: %s)\n", greeting, name);
+
+        boolean has_bug = true;
+
+        if (has_bug) {
+            throw new UnsupportedOperationException("oops, can't send to Bob right now");
         }
-        return "Two Done!";
+
+        System.out.printf("*** SMS: Hey %s %s!\n", greeting, name);
     }
 
     @Override
-    public String stepThree(String input) {
-        System.out.println("Running step 3 with input " + input);
-        return "Three Done!";
+    public void sendEmail(String greeting, String name) {
+        System.out.printf("--> sendEmail(greeting: %s, name: %s)\n", greeting, name);
+        System.out.printf("*** Email: Hey %s %s!\n", greeting, name);
     }
 }

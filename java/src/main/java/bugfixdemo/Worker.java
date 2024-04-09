@@ -18,8 +18,8 @@ public class Worker {
     private static final Logger logger = LoggerFactory.getLogger(Worker.class);
 
     public static void main(String[] args) {
-        io.temporal.worker.Worker worker = factory.newWorker(Shared.TASK_QUEUE_NAME);
-        worker.registerWorkflowImplementationTypes(BugFixDemoWorkflowImpl.class);
+        io.temporal.worker.Worker worker = factory.newWorker("bugfix-demo");
+        worker.registerWorkflowImplementationTypes(GreeterWorkflow.class);
         worker.registerActivitiesImplementations(new BugFixDemoActivitiesImpl());
 
         logger.debug("Starting worker");
