@@ -23,10 +23,11 @@ func Greeter(ctx workflow.Context, name string) error {
 
 	var greeting string
 
-	err := workflow.ExecuteActivity(ctx,
+	pick := workflow.ExecuteActivity(ctx,
 		act.PickGreeting,
 		name,
-	).Get(ctx, &greeting)
+	)
+	err := pick.Get(ctx, &greeting)
 	if err != nil {
 		return err
 	}
