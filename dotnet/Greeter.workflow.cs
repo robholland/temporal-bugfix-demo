@@ -14,6 +14,10 @@ public class Greeter
             new()
             {
                 StartToCloseTimeout = TimeSpan.FromSeconds(1),
+                RetryPolicy = new()
+                {
+                    MaximumInterval = TimeSpan.FromSeconds(5),
+                }
             });
 
         var sms = Workflow.ExecuteActivityAsync(
@@ -21,6 +25,10 @@ public class Greeter
             new()
             {
                 StartToCloseTimeout = TimeSpan.FromSeconds(1),
+                RetryPolicy = new()
+                {
+                    MaximumInterval = TimeSpan.FromSeconds(5),
+                }
             });
 
         var email = Workflow.ExecuteActivityAsync(
@@ -28,6 +36,10 @@ public class Greeter
             new()
             {
                 StartToCloseTimeout = TimeSpan.FromSeconds(1),
+                RetryPolicy = new()
+                {
+                    MaximumInterval = TimeSpan.FromSeconds(5),
+                }
             });
 
         await Task.WhenAll(sms, email);
