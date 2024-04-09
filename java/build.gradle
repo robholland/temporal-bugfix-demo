@@ -36,8 +36,8 @@ dependencies {
     implementation group: 'io.cloudevents', name: 'cloudevents-json-jackson', version: '2.3.0'
 }
 
-task startWorkflow(type: JavaExec) {
-    mainClass = 'bugfixdemo.Starter'
+task startWorkflows(type: JavaExec) {
+    mainClass = 'bugfixdemo.StartWorkflows'
     classpath = sourceSets.main.runtimeClasspath
 }
 
