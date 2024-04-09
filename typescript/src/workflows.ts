@@ -13,8 +13,11 @@ export async function greeter(name: string): Promise<string> {
   wf.log.info(`Workflow started`)
 
   const greeting = await pickGreeting(name);
-  await sendSMS(greeting, name);
-  await sendEmail(greeting, name);
+
+  Promise.all([
+    sendSMS(greeting, name),
+    sendEmail(greeting, name),
+  ])
 
   wf.log.info(`Workflow completed`)
 
