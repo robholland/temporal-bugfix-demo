@@ -31,7 +31,7 @@ async def pickGreeting(input: PickGreetingInput) -> str:
 async def sendSMS(input: SendSMSInput):
     print("--> sendSMS(greeting: %s, name: %s)" % (input.greeting, input.name))
 
-    has_bug = False
+    has_bug = True
     if has_bug and input.name == "Bob":
         raise Exception("oops, can't send to Bob right now")
 

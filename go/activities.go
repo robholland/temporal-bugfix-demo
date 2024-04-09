@@ -24,7 +24,7 @@ func (a *Activities) PickGreeting(name string) (string, error) {
 func (a *Activities) SendSMS(greeting string, name string) error {
 	fmt.Printf("--> sendSMS(greeting: %s, name: %s)\n", greeting, name)
 
-	hasBug := false
+	hasBug := true
 
 	if hasBug && name == "Bob" {
 		return errors.New("oops, can't send to Bob right now")
