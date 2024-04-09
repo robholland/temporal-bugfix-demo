@@ -14,7 +14,7 @@ export async function greeter(name: string): Promise<string> {
 
   const greeting = await pickGreeting(name);
 
-  Promise.all([
+  await Promise.all([
     sendSMS(greeting, name),
     sendEmail(greeting, name),
   ])
