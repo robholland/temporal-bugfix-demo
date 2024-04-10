@@ -32,7 +32,6 @@ class Greeter:
             retry_policy=RetryPolicy(maximum_interval=timedelta(seconds=5)),
         )
 
-        await sms
-        await email
+        await asyncio.gather(sms, email)
 
         workflow.logger.info("Workflow completed")
