@@ -25,8 +25,8 @@ public class GreeterImpl implements GreeterWorkflow {
     public String greeter(String name) {
         String greeting = activities.pickGreeting(name);
         
-        Promise<String> email = Async.function(activities::sendEmail, greeting, name);
-        Promise<String> sms = Async.function(activities::sendSMS, greeting, name);
+        Promise<Void> email = Async.procedure(activities::sendEmail, greeting, name);
+        Promise<Void> sms = Async.procedure(activities::sendSMS, greeting, name);
 
         email.get();
         sms.get();

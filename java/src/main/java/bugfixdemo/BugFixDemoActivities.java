@@ -9,8 +9,8 @@ public interface BugFixDemoActivities {
     String pickGreeting(String name);
 
     @ActivityMethod()
-    String sendSMS(String greeting, String name);
+    void sendSMS(String greeting, String name);
 
     @ActivityMethod()
-    String sendEmail(String greeting, String name);
+    void sendEmail(String greeting, String name);
 }
