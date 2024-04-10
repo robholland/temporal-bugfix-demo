@@ -19,7 +19,7 @@ public class Worker {
 
     public static void main(String[] args) {
         io.temporal.worker.Worker worker = factory.newWorker("bugfix-demo");
-        worker.registerWorkflowImplementationTypes(GreeterWorkflow.class);
+        worker.registerWorkflowImplementationTypes(GreeterImpl.class);
         worker.registerActivitiesImplementations(new BugFixDemoActivitiesImpl());
 
         logger.debug("Starting worker");

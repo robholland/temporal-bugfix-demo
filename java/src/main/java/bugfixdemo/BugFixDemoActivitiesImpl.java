@@ -16,21 +16,25 @@ public class BugFixDemoActivitiesImpl implements BugFixDemoActivities {
     }
 
     @Override
-    public void sendSMS(String greeting, String name) {
+    public String sendSMS(String greeting, String name) {
         System.out.printf("--> sendSMS(greeting: %s, name: %s)\n", greeting, name);
 
         boolean has_bug = true;
 
-        if (has_bug) {
+        if (has_bug && name.equals("Bob")) {
             throw new UnsupportedOperationException("oops, can't send to Bob right now");
         }
 
         System.out.printf("*** SMS: Hey %s %s!\n", greeting, name);
+
+        return "";
     }
 
     @Override
-    public void sendEmail(String greeting, String name) {
+    public String sendEmail(String greeting, String name) {
         System.out.printf("--> sendEmail(greeting: %s, name: %s)\n", greeting, name);
         System.out.printf("*** Email: Hey %s %s!\n", greeting, name);
+
+        return "";
     }
 }
