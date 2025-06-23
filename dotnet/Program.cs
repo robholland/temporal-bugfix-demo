@@ -58,5 +58,5 @@ switch (args.ElementAtOrDefault(0))
         await ExecuteWorkflowAsync();
         break;
     default:
-        throw new ArgumentException("Must pass 'worker' or 'workflow' as the single argument");
+        throw new ArgumentException("Must pass 'worker' or 'start-workflows' as the single argument");
 }
